@@ -1,21 +1,63 @@
-plugins {
-    id 'java'
+buildscript {
+    repositories {
+        mavenCentral()
+    }
 }
 
-group = 'org.example'
+plugins {
+    id 'java'
+    id 'eclipse'
+    id 'idea'
+    id "net.serenity-bdd.serenity-gradle-plugin" version "4.3.2"
+}
+//apply plugin: 'net.serenity-bdd.serenity-gradle-plugin'
+
+group = 'co.edu.udea.buggyrating'
 version = '1.0-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
 
 repositories {
     mavenCentral()
 }
 
+ext {
+    serenityVersion = '4.3.2'
+    serenityCucumberVersion = '4.3.2'
+    junitVersion = '4.13.2'
+    hamcrestVersion = '2.2'
+    lombokVersion = '1.18.38'
+}
+
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-    classpath("net.serenity-bdd:serenity-gradle-plugin:3.3.4")
+
+    implementation "net.serenity-bdd:serenity-core:$serenityVersion"
+    implementation "net.serenity-bdd:serenity-junit:$serenityVersion"
+    implementation "net.serenity-bdd:serenity-screenplay:$serenityVersion"
+    implementation "net.serenity-bdd:serenity-screenplay-webdriver:$serenityVersion"
+    implementation "net.serenity-bdd:serenity-cucumber:$serenityCucumberVersion"
+
+    implementation 'org.slf4j:slf4j-simple:2.0.5'
+
+    testImplementation "junit:junit:$junitVersion"
+    testImplementation "org.hamcrest:hamcrest:$hamcrestVersion"
+
+    testImplementation "io.github.bonigarcia:webdrivermanager:5.4.1"
+
+    compileOnly "org.projectlombok:lombok:$lombokVersion"
+    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+
+    testCompileOnly "org.projectlombok:lombok:$lombokVersion"
+    testAnnotationProcessor "org.projectlombok:lombok:$lombokVersion"
 }
 
 test {
-    useJUnitPlatform()
+    useJUnit()
 }
+
+gradle.startParameter.continueOnFailure = true
+
+test.finalizedBy(aggregate)
