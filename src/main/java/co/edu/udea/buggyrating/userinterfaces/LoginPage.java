@@ -22,7 +22,7 @@ public class LoginPage extends PageObject {
                     .locatedBy("//span[contains(text(),'Invalid')]");
 
     public static final Target USER_LOGGED =
-            Target.the("Logged username")
-                    .locatedBy("//a[contains(@class,'navbar-brand')]");
+            Target.the("Logged user")
+                    .locatedBy("//*[contains(text(),'Hi,')]");
 
 }

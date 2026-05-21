@@ -35,7 +35,7 @@ public class RegisterPage extends PageObject {
 
     public static final Target MESSAGE_SUCCESS =
             Target.the("Successful registration message")
-                    .locatedBy("//div[contains(text(),'successfully')]");
+                    .locatedBy("//div[contains(text(),'Registration is successful')]");
 
     public static final Target MESSAGE_REGISTER_ERROR =
             Target.the("Register error message")

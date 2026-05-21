@@ -7,7 +7,10 @@ import net.serenitybdd.screenplay.Interaction;
 import net.serenitybdd.screenplay.Tasks;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
+import net.serenitybdd.screenplay.waits.WaitUntil;
 
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isClickable;
 import static co.edu.udea.buggyrating.userinterfaces.CarPage.*;
 import static co.edu.udea.buggyrating.userinterfaces.LoginPage.*;
 import static co.edu.udea.buggyrating.userinterfaces.RegisterPage.*;
@@ -100,12 +103,20 @@ public class EnterThe implements Interaction {
             case "comment":
 
                 actor.attemptsTo(
+
+                        WaitUntil.the(INPUT_COMMENT, isVisible())
+                                .forNoMoreThan(15).seconds(),
+
                         Enter.theValue(comment).into(INPUT_COMMENT)
                 );
 
                 WaitTime.putWaitTimeOf(2000);
 
                 actor.attemptsTo(
+
+                        WaitUntil.the(BUTTON_VOTE, isClickable())
+                                .forNoMoreThan(15).seconds(),
+
                         Click.on(BUTTON_VOTE)
                 );
 

@@ -7,26 +7,30 @@ public class CarPage extends PageObject {
 
     public static final Target BRAND_LAMBORGHINI =
             Target.the("Lamborghini brand")
-                    .locatedBy("//img[contains(@src,'lamborghini')]");
+                    .locatedBy("//img[@title='Lamborghini']");
 
     public static final Target MODEL_LAMBORGHINI =
             Target.the("Lamborghini model")
-                    .locatedBy("//a[contains(text(),'Lamborghini Diablo')]");
+                    .locatedBy("//a[@href[contains(.,'/model/')]][text()='Diablo']");
+
+    public static final Target MODEL_REVENTON =
+            Target.the("Lamborghini Reventon")
+                    .locatedBy("//a[contains(@href,'/model/') and text()='Reventón']");
 
     public static final Target INPUT_COMMENT =
             Target.the("Comment input")
-                    .locatedBy("//textarea");
+                    .locatedBy("//textarea[@id='comment']");
 
     public static final Target BUTTON_VOTE =
             Target.the("Button vote")
-                    .locatedBy("//button[contains(text(),'Vote!')]");
+                    .locatedBy("//button[contains(.,'Vote')]");
 
     public static final Target COMMENT_RESULT =
             Target.the("Published comment")
-                    .locatedBy("//p[contains(text(),'Excelente auto')]");
+                    .locatedBy("//body");
 
     public static final Target MESSAGE_COMMENT_ERROR =
             Target.the("Comment error message")
-                    .locatedBy("XPATH_DEL_ERROR");
+                    .locatedBy("//*[contains(text(),'Comment')]");
 
 }

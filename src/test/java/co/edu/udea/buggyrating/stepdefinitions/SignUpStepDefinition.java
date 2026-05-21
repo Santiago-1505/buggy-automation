@@ -33,7 +33,7 @@ public class SignUpStepDefinition {
             User.withCredentials(
                     "newuser123",
                     "Jenny",
-                    "Orozco",
+                    "Orozco.12345678",
                     "Test123!"
             );
 
@@ -41,7 +41,7 @@ public class SignUpStepDefinition {
             User.withCredentials(
                     "testuser",
                     "Jenny",
-                    "Orozco",
+                    "Orozco.12345678",
                     "Test123!"
             );
 
@@ -89,7 +89,7 @@ public class SignUpStepDefinition {
         GivenWhenThen.then(user).should(
                 GivenWhenThen.seeThat(
                         ValidationFor.successfulRegister(),
-                        Matchers.containsString("Logout")
+                        Matchers.containsString("Registration is successful")
                 )
         );
     }

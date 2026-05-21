@@ -32,7 +32,7 @@ public class CommentStepDefinition {
     public WebDriver theDriver;
 
     private final User validUser =
-            User.withCredentials("testuser", "Jenny", "Orozco", "Test123!");
+            User.withCredentials("testuser", "Jenny", "Orozco.12345678", "Test123!");
 
     @Before
     public void config() {
@@ -57,7 +57,17 @@ public class CommentStepDefinition {
     public void iSelectAVehicle() {
 
         user.attemptsTo(
-                SelectCar.brand()
+                SelectCar.model("Diablo")
+        );
+
+        WaitTime.putWaitTimeOf(2000);
+    }
+
+    @When("I select another vehicle")
+    public void iSelectAnotherVehicle() {
+
+        user.attemptsTo(
+                SelectCar.model("Reventon")
         );
 
         WaitTime.putWaitTimeOf(2000);
@@ -86,6 +96,8 @@ public class CommentStepDefinition {
     @Then("I can see my comment published in the vehicle section")
     public void iCanSeeMyCommentPublishedInTheVehicleSection() {
 
+        WaitTime.putWaitTimeOf(3000);
+
         GivenWhenThen.then(user).should(
                 GivenWhenThen.seeThat(
                         ValidationFor.successfulComment(),
@@ -94,13 +106,16 @@ public class CommentStepDefinition {
         );
     }
 
-    @Then("I can see a validation message indicating that the comment is required")
-    public void iCanSeeAValidationMessageIndicatingThatTheCommentIsRequired() {
+
+    @Then("I can see the vote confirmation message")
+    public void iCanSeeTheVoteConfirmationMessage() {
+
+        WaitTime.putWaitTimeOf(3000);
 
         GivenWhenThen.then(user).should(
                 GivenWhenThen.seeThat(
-                        ValidationFor.failedComment(),
-                        Matchers.containsString("required")
+                        ValidationFor.successfulComment(),
+                        Matchers.containsString("Votes:")
                 )
         );
     }

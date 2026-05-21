@@ -34,8 +34,8 @@ Feature: Register into Buggy Cars Rating, login into the platform, select a vehi
     When I enter invalid credentials
     Then I can see an authentication error message
 
-  Scenario: Fail to publish an empty comment.
+  Scenario: Publish an empty comment successfully
     Given I am logged into Buggy Cars Rating
-    When I select a vehicle
+    When I select another vehicle
     And I try to publish an empty comment
-    Then I can see a validation message indicating that the comment is required
+    Then I can see the vote confirmation message

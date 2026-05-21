@@ -30,7 +30,7 @@ public class LoginStepDefinition {
     public WebDriver theDriver;
 
     private final User validUser =
-            User.withCredentials("testuser", "Jenny", "Orozco", "Test123!");
+            User.withCredentials("testuser", "Jenny", "Orozco.12345678", "Test123!");
 
     private final User invalidUser =
             User.withCredentials("wronguser", "Wrong", "User", "wrong123");
